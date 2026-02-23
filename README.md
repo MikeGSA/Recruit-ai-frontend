@@ -10,6 +10,11 @@ Recruit-AI is a fully integrated candidate screening system that leverages AI ag
 - **Schedule** interviews automatically for qualified candidates (Agent 3)
 - **Handle** rejection emails for unsuitable candidates (Agent 2b)
 
+### Backend Workflow
+**n8n Workflow**: [View the complete AI pipeline](https://iitprecruitaiproject.app.n8n.cloud/workflow/aGjvgYERjR0zUbD9)
+
+This workflow orchestrates all AI agents in sequence and handles the entire recruitment screening flow.
+
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -139,17 +144,23 @@ useRecruitStore() provides:
 ```
 
 ### API Integration (n8n)
+**Workflow**: https://iitprecruitaiproject.app.n8n.cloud/workflow/aGjvgYERjR0zUbD9
+
 Two main webhooks:
 
 1. **Screening Pipeline**
    - Endpoint: `NEXT_PUBLIC_N8N_PIPELINE_WEBHOOK`
+   - Webhook path: `/webhook/screening-pipeline`
    - Payload: `{ resume_text, job_description, job_id }`
    - Returns: `ScreeningResult` with full candidate data and scores
+   - Runs: Agent 1 (Parse) → Agent 2 (Score) → Agent 2b/3 (Rejection/Scheduling)
 
 2. **Scheduling Webhook**
    - Endpoint: `NEXT_PUBLIC_N8N_SCHEDULING_WEBHOOK`
+   - Webhook path: `/webhook/schedule-interview`
    - Payload: `{ candidate_email, candidate_name, job_title, job_id }`
    - Returns: `SchedulingResult` with available time slots
+   - Runs: Agent 3 (Interview Scheduling)
 
 ## 🎨 Styling
 
