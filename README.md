@@ -2,6 +2,13 @@
 
 A modern, AI-powered recruitment screening application built with Next.js, React, and Tailwind CSS.
 
+## 📦 Project Structure
+
+This is the **Frontend Repository** for IIT PMRecruit AI.
+
+- **Frontend**: [Recruit-ai-frontend](https://github.com/MikeGSA/Recruit-ai-frontend) (this repo)
+- **Backend**: [IIT-PMRecruit-AI](https://github.com/MikeGSA/IIT-PMRecruit-AI) (n8n workflow documentation)
+
 ## 🎯 Overview
 
 Recruit-AI is a fully integrated candidate screening system that leverages AI agents to:
@@ -13,6 +20,8 @@ Recruit-AI is a fully integrated candidate screening system that leverages AI ag
 ### Backend Workflow
 **n8n Workflow**: [View the complete AI pipeline](https://iitprecruitaiproject.app.n8n.cloud/workflow/aGjvgYERjR0zUbD9)
 
+**Backend Repository**: [IIT-PMRecruit-AI Backend](https://github.com/MikeGSA/IIT-PMRecruit-AI)
+
 This workflow orchestrates all AI agents in sequence and handles the entire recruitment screening flow.
 
 ## 🚀 Quick Start
@@ -20,6 +29,7 @@ This workflow orchestrates all AI agents in sequence and handles the entire recr
 ### Prerequisites
 - Node.js 18+ or later
 - npm or yarn
+- Backend webhook URLs from [IIT-PMRecruit-AI](https://github.com/MikeGSA/IIT-PMRecruit-AI)
 
 ### Installation
 
@@ -28,8 +38,8 @@ This workflow orchestrates all AI agents in sequence and handles the entire recr
 npm install
 
 # Set up environment variables
-cp .env.local.example .env.local
-# Edit .env.local with your n8n webhook URLs
+cp .env.example .env.local
+# Edit .env.local with your n8n webhook URLs from the backend repo
 ```
 
 ### Development
@@ -144,6 +154,9 @@ useRecruitStore() provides:
 ```
 
 ### API Integration (n8n)
+
+**Backend Repository**: https://github.com/MikeGSA/IIT-PMRecruit-AI
+
 **Workflow**: https://iitprecruitaiproject.app.n8n.cloud/workflow/aGjvgYERjR0zUbD9
 
 Two main webhooks:
@@ -161,6 +174,8 @@ Two main webhooks:
    - Payload: `{ candidate_email, candidate_name, job_title, job_id }`
    - Returns: `SchedulingResult` with available time slots
    - Runs: Agent 3 (Interview Scheduling)
+
+For complete backend documentation, see: [IIT-PMRecruit-AI Backend Repository](https://github.com/MikeGSA/IIT-PMRecruit-AI)
 
 ## 🎨 Styling
 
@@ -276,10 +291,22 @@ docker run -p 3000:3000 -e NEXT_PUBLIC_N8N_PIPELINE_WEBHOOK=... recruit-ai-front
 
 ## 📖 Learn More
 
+### Related Repositories
+- **Backend (n8n Workflow)**: https://github.com/MikeGSA/IIT-PMRecruit-AI
+  - Complete backend documentation
+  - API specifications
+  - Configuration guide
+  
+### Documentation
 - [Next.js Documentation](https://nextjs.org/docs)
 - [React Documentation](https://react.dev)
 - [Tailwind CSS](https://tailwindcss.com)
 - [Zustand](https://github.com/pmndrs/zustand)
+
+### Backend Documentation
+- [Backend README](https://github.com/MikeGSA/IIT-PMRecruit-AI)
+- [API Reference](https://github.com/MikeGSA/IIT-PMRecruit-AI/blob/main/API.md)
+- [Setup Guide](https://github.com/MikeGSA/IIT-PMRecruit-AI/blob/main/SETUP.md)
 
 ## 📄 License
 
