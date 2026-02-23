@@ -92,9 +92,14 @@ interface RecruitStore {
 
   addScreeningResult: (roleId: string, result: ScreeningResult) => void;
   getRoleById: (id: string) => Role | undefined;
+  getCandidatesByRoleId: (roleId: string) => ScreeningResult[];
   // candidateId is the candidate's email address (URL-encoded in routes)
   getCandidateById: (candidateEmail: string) => ScreeningResult | undefined;
   getAllCandidates: () => ScreeningResult[];
+  getCandidatesByStatus: (status: string) => ScreeningResult[];
+  getQualifiedCandidates: () => ScreeningResult[];
+  getBorderlineCandidates: () => ScreeningResult[];
+  getRejectedCandidates: () => ScreeningResult[];
 }
 
 // ─── Store ────────────────────────────────────────────────────────────────────
@@ -120,12 +125,34 @@ export const useRecruitStore = create<RecruitStore>()(
 
       getRoleById: (id) => get().roles.find((r) => r.id === id),
 
+      getCandidatesByRoleId: (roleId) => get().screeningResults[roleId] ?? [],
+
       getCandidateById: (candidateEmail) =>
         Object.values(get().screeningResults)
           .flat()
           .find((r) => r.candidate.email === candidateEmail),
 
       getAllCandidates: () => Object.values(get().screeningResults).flat(),
+
+      getCandidatesByStatus: (status) =>
+        Object.values(get().screeningResults)
+          .flat()
+          .filter((r) => r.status === status),
+
+      getQualifiedCandidates: () =>
+        Object.values(get().screeningResults)
+          .flat()
+          .filter((r) => r.status === 'Qualified/High' || r.status === 'Qualified/Medium'),
+
+      getBorderlineCandidates: () =>
+        Object.values(get().screeningResults)
+          .flat()
+          .filter((r) => r.status === 'Borderline'),
+
+      getRejectedCandidates: () =>
+        Object.values(get().screeningResults)
+          .flat()
+          .filter((r) => r.status === 'Rejected'),
     }),
     {
       name: 'recruit-ai-store',
