@@ -3,12 +3,18 @@ import { useRecruitStore } from '@/lib/store';
 import ScoreBadge from '@/components/ScoreBadge';
 
 export default function Dashboard() {
-  const { roles, getAllCandidates } = useRecruitStore();
+  const {
+    roles,
+    getAllCandidates,
+    getQualifiedCandidates,
+    getBorderlineCandidates,
+    getRejectedCandidates,
+  } = useRecruitStore();
 
   const allCandidates = getAllCandidates();
-  const qualified     = allCandidates.filter((c) => c.proceed_to_scheduling);
-  const rejected      = allCandidates.filter((c) => c.status === 'Rejected');
-  const borderline    = allCandidates.filter((c) => c.status === 'Borderline');
+  const qualified = getQualifiedCandidates();
+  const rejected = getRejectedCandidates();
+  const borderline = getBorderlineCandidates();
 
   const openRoles = roles.filter((r) => r.status === 'Open');
 
